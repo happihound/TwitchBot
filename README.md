@@ -1,2 +1,2 @@
 # TwitchBot
-A lightweight twitch bot built on the Twitch API v5 (kraken) using Java 11
+A lightweight twitch bot built on the Twitch v5 API (kraken) using Java 11
