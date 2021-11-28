@@ -1,0 +1,48 @@
+
+		import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.net.URLConnection;
+
+import com.cavariux.twitchirc.Json.JsonObject;
+
+public class Main {
+	//private static final long serialVersionUID = -7052336505238067851L;
+	//private static final String V5_API_BASE = "https://api.twitch.tv/kraken/channels";
+
+	public static void main(String[] args){
+
+
+		System.out.println("STARTED");
+		// this.setUsername("Proofreads");
+		// this.setOauth_Key("oauth:1bpltca4gs5as6dvu47ycz24b9kvqk");
+		// this.setClientID("5dngewtl176az4k5p7siw8uwy3knz7");
+		String username = "happihound";
+		String Oauth_Key = "oauth:ohuzhxptzl6qamatuewdeglklmqav8";
+		String ClientID = "evcpyezzzpgj7855xtekv936yk04a1";
+		String requestUri = V5_API_BASE + "51065352" + "/subscriptions/";
+		try {
+			URL request = new URL(requestUri);
+			URLConnection conn = request.openConnection();
+			// conn.setRequestMethod("GET");
+			conn.setRequestProperty("Authorization", "OAuth " + Oauth_Key);
+			conn.setRequestProperty("Client-ID", ClientID);
+			conn.setRequestProperty("Accept", "application/vnd.twitchtv.v5+json");
+
+			Reader response = new InputStreamReader(conn.getInputStream());
+			JsonObject responseObj = JsonObject.readFrom(response);
+			System.out.println(responseObj.toString());
+			// id signalizes that subscription exists; underscore intentional
+		} catch (FileNotFoundException e) { // No subscription. For some reason this happens instead of a JSON object
+											// being sent.
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		}
+	}
+
+}
+		
